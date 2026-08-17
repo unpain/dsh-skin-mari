@@ -1,0 +1,9 @@
+This is an unofficial fan-made DSH interface skin.
+
+Mari Makinami Illustrious and Evangelion are properties of their respective
+rights holders. The original character composition in
+assets/mari-character-cutout.* was created with OpenAI Image generation for
+this theme; it does not reuse animation frames or third-party illustrations.
+
+The DSH skin integration follows the public client-plugin and skin-manager
+contracts used by dsh-web-ui and dsh-skin-switch.

@@ -1,0 +1,28 @@
+{
+  "id": "dsh-skin-mari",
+  "name": "真希波 · UNIT-08",
+  "nameEn": "Mari Makinami · UNIT-08",
+  "author": "Local DSH theme",
+  "tagline": "玫红光学试验台、荧光校准标记与八号机动态界面",
+  "description": "一套面向 DSH Web UI 的真希波主题皮肤：以烟紫黑、玫红、荧光黄绿和暖象牙白构成 UNIT-08 光学测试台，并以眼镜双镜片和校准准星统一界面语言。",
+  "tags": [
+    "anime",
+    "mari",
+    "unit-08",
+    "magenta",
+    "optical-lab",
+    "hud"
+  ],
+  "accent": "#F04B91",
+  "bodyAttr": "data-dsh-mari-interface",
+  "package": "dsh-skin-mari",
+  "wiring": {
+    "id": "ui-skin-mari-interface",
+    "bundleWired": false
+  },
+  "preview": {
+    "light": "preview/light.webp",
+    "dark": "preview/dark.webp"
+  },
+  "order": 4
+}

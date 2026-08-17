@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#200b1b">
+  <title>DSH Mari Skin Preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body { font-family: Inter, "Segoe UI", ui-sans-serif, system-ui, sans-serif; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .titlebar { position: relative; z-index: 20; display: flex; align-items: center; height: 30px; color: #ffe6f1; background: #180714; }
+    #root { height: calc(100% - 30px); }
+    .appShell { display: grid; grid-template-columns: 280px 1fr; height: 100%; }
+    .sidebarCol { position: relative; min-width: 0; }
+    .sidebarInner { height: 100%; padding: 17px 14px; }
+    .brand { display: flex; align-items: center; gap: 11px; height: 38px; color: #fff4f9; font-weight: 760; }
+    .brandMark { display: grid; place-items: center; width: 34px; height: 25px; border: 1px solid #c8f13f; color: #241020; background: #c8f13f; font: 900 11px ui-monospace; }
+    .brandCopy { display: grid; gap: 3px; }
+    .brandCopy small { color: #9b7086; font: 700 8px ui-monospace; letter-spacing: .15em; }
+    .newSessionButton { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 40px; margin: 17px 0 20px; }
+    .sectionLabel { margin: 18px 8px 8px; color: #946c80; font: 700 9px ui-monospace; letter-spacing: .15em; }
+    .treeRow { position: relative; display: flex; align-items: center; gap: 10px; height: 39px; padding: 0 10px; color: #deb8ca; border-radius: 5px; font-size: 13px; }
+    .treeRow svg { width: 16px; flex: none; }
+    .treeRow[aria-selected="true"] { color: #fff4f9; }
+    .profile { position: absolute; right: 14px; bottom: 18px; left: 14px; display: flex; align-items: center; gap: 10px; padding-top: 14px; border-top: 1px solid rgba(139,216,239,.13); color: #adc8d1; font-size: 12px; }
+    .avatar { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid #8a2c5b; border-radius: 50%; color: #ffe6f1; background: #4a1739; font: 800 9px ui-monospace; }
+    .centerCol { position: relative; min-width: 0; overflow: hidden; }
+    .headerShell { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; height: 62px; padding: 0 26px; }
+    .tabs { display: flex; align-items: stretch; height: 100%; gap: 24px; }
+    .tab { display: flex; align-items: center; border: 0; border-bottom: 2px solid transparent; color: #8caab4; background: transparent; font-size: 12px; }
+    .tabActive { color: inherit; }
+    .headerMeta { color: #bd8ba3; font: 700 9px ui-monospace; letter-spacing: .12em; }
+    .hero, .activeScene { position: absolute; inset: 62px 0 0; }
+    .heroContent { position: absolute; z-index: 4; top: 47%; left: 42%; width: min(52vw, 710px); transform: translate(-50%, -50%); }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: #c8f13f; font: 800 10px ui-monospace; letter-spacing: .18em; }
+    .eyebrow::before { content: ''; width: 34px; height: 2px; background: #c8f13f; }
+    .headline { margin: 12px 0 8px; max-width: 560px; font-size: clamp(38px, 4.1vw, 60px); line-height: 1.02; }
+    .subtitle { max-width: 510px; margin: 0 0 28px; color: var(--dsw-alias-label-secondary); font-size: 13px; line-height: 1.75; }
+    [data-composer-card] { position: relative; width: min(55vw, 710px); min-height: 150px; padding: 28px 22px 16px; color: var(--dsw-alias-label-primary); }
+    .placeholder { color: var(--dsw-alias-label-tertiary); font-size: 13px; }
+    .toolbar { position: absolute; right: 16px; bottom: 14px; left: 16px; display: flex; align-items: center; justify-content: space-between; }
+    .tools { display: flex; gap: 8px; }
+    .toolButton, .sendButton { display: grid; place-items: center; width: 33px; height: 33px; border: 1px solid var(--dsw-alias-border-l2); border-radius: 7px; color: var(--dsw-alias-label-secondary); background: var(--dsw-alias-button-elevated-fill); }
+    .toolButton svg, .sendButton svg { width: 15px; }
+    .model { display: flex; align-items: center; padding: 0 11px; border: 1px solid var(--dsw-alias-border-l2); border-radius: 7px; color: var(--dsw-alias-label-secondary); background: var(--dsw-alias-button-elevated-fill); font: 700 9px ui-monospace; }
+    .sendButton { border: 0; }
+    .activeScene { display: none; overflow: auto; padding: 32px clamp(24px,8vw,140px) 150px; }
+    .activeScene[data-chat-flow] { color: var(--dsw-alias-label-primary); }
+    .messageRow { max-width: 780px; margin: 0 auto 28px; }
+    .userRow { display: flex; justify-content: flex-end; }
+    .bubble { max-width: 520px; padding: 13px 16px; line-height: 1.6; }
+    .assistantContent { max-width: 720px; font-size: 14px; line-height: 1.75; }
+    .reasoning { margin: 14px 0; padding: 10px 14px; border-left: 2px solid; color: var(--dsw-alias-label-secondary); background: var(--dsw-alias-bg-layer-1); }
+    [data-terminal] { margin-top: 14px; padding: 14px 16px; border-radius: 7px; font: 12px/1.7 ui-monospace; }
+    .activeComposer { position: absolute; z-index: 7; right: 9%; bottom: 24px; left: 9%; width: auto; min-height: 94px; }
+    .settingsLayer { position: fixed; z-index: 50; inset: 30px 0 0; display: none; place-items: center; background: rgba(2,12,19,.46); backdrop-filter: blur(5px); }
+    .settingsDialog { width: min(760px,84vw); min-height: 460px; padding: 28px; border: 1px solid var(--dsw-alias-border-l2); border-radius: 14px; }
+    .settingsDialog h2 { margin: 0 0 7px; font-size: 22px; }
+    .settingsDialog p { margin: 0 0 24px; color: var(--dsw-alias-label-secondary); }
+    .settingGrid { display: grid; grid-template-columns: 190px 1fr; gap: 16px 24px; padding-top: 20px; border-top: 1px solid var(--dsw-alias-border-l1); }
+    .settingNav { display: grid; align-content: start; gap: 6px; }
+    .settingNav button { padding: 10px 12px; border: 0; border-radius: 7px; color: var(--dsw-alias-label-secondary); background: transparent; text-align: left; }
+    .settingNav button[aria-selected="true"] { color: var(--dsw-alias-label-primary); background: var(--dsw-alias-interactive-bg-active); }
+    .skinCard { display: grid; grid-template-columns: 78px 1fr auto; align-items: center; gap: 16px; padding: 14px; border: 1px solid var(--dsw-alias-border-l2); border-radius: 10px; background: var(--dsw-alias-bg-layer-1); }
+    .miniArt { height: 66px; object-fit: contain; }
+    .skinCard strong { display: block; margin-bottom: 5px; }
+    .skinCard span { color: var(--dsw-alias-label-secondary); font-size: 12px; }
+    .selectedBadge { padding: 6px 9px; border-radius: 6px; color: #241020 !important; background: #c8f13f; font: 800 9px ui-monospace; }
+    body.scene-active .hero { display: none; }
+    body.scene-active .activeScene { display: block; }
+    body.scene-settings .settingsLayer { display: grid; }
+    @media (max-width: 760px) {
+      .appShell { grid-template-columns: 72px 1fr; }
+      .sidebarInner { padding-inline: 10px; }
+      .brandCopy, .newSessionButton span, .sectionLabel, .treeRow span, .profile span:last-child { display: none; }
+      .brand, .treeRow, .newSessionButton { justify-content: center; }
+      .brandMark { flex: none; }
+      .heroContent { left: 50%; width: min(84vw,620px); }
+      [data-composer-card] { width: 100%; }
+      .headline { font-size: 38px; }
+      .settingGrid { grid-template-columns: 1fr; }
+      .settingNav { grid-template-columns: repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="titlebar"></div>
+  <main id="root">
+    <div class="appShell">
+      <aside class="sidebarCol" data-pane="sidebar">
+        <div class="sidebarInner">
+          <div class="brand"><span class="brandMark">08</span><span class="brandCopy">DeepSeek Harness<small>OPTICAL TEST LAB</small></span></div>
+          <button class="newSessionButton"><svg width="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg><span>新建任务</span></button>
+          <div class="sectionLabel">WORKSPACES</div>
+          <div class="treeRow" role="treeitem" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h7l2 2h9v10H3z"/></svg><span>dsh / mari-interface</span></div>
+          <div class="treeRow" role="treeitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg><span>真希波皮肤设计</span></div>
+          <div class="treeRow" role="treeitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg><span>最近任务</span></div>
+          <div class="sectionLabel">SYSTEM</div>
+          <div class="treeRow" role="treeitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.5-2.4 1A7 7 0 0 0 15 6l-.3-2.6h-4L10.4 6A7 7 0 0 0 8 7L5.6 6l-2 3.5 2 1.5a7 7 0 0 0 0 2l-2 1.5 2 3.5L8 17a7 7 0 0 0 2.4 1l.3 2.6h4L15 18a7 7 0 0 0 2.4-1l2.4 1 2-3.5-2-1.5a7 7 0 0 0 .2-1z"/></svg><span>设置</span></div>
+          <div class="profile"><span class="avatar">YM</span><span>本地测试员</span></div>
+        </div>
+      </aside>
+      <section class="centerCol" data-pane="conversation">
+        <header class="headerShell"><nav class="tabs"><button class="tab tabActive">对话</button><button class="tab">轨迹</button><button class="tab">检查</button></nav><span class="headerMeta">OPTICS / LOCKED · MAGI / GREEN</span></header>
+        <section class="hero" data-phase="hero">
+          <div class="heroContent">
+            <div class="eyebrow">EVA UNIT-08 // TARGET ACQUIRED</div>
+            <h1 class="headline">来点有趣的任务吧？</h1>
+            <p class="subtitle">八号机光学台已校准。把目标交给 DSH，玫红测试层级会把任务、工具与运行状态锁进同一副清晰视野。</p>
+            <div data-composer-card><span class="placeholder">描述一个清晰的任务...</span><div class="toolbar"><div class="tools"><button class="toolButton"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><span class="model">GPT-5.6-LUNA / MAX</span></div><button class="sendButton primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button></div></div>
+          </div>
+        </section>
+        <section class="activeScene" data-phase="active" data-chat-flow>
+          <div class="messageRow userRow"><div class="bubble">帮我检查这个光学主题的切换和清理逻辑。</div></div>
+          <div class="messageRow assistantRow"><div class="assistantContent"><strong>校准完成。</strong><p>激活过程由皮肤管理器统一接管，注册阶段保持惰性。切换回默认皮肤时，主题节点、系统颜色、标题和 favicon 都会恢复。</p><div class="reasoning">正在核对观察器、动画帧与侧栏尺寸监听的回收顺序……</div><div data-terminal>$ node tests/apply.spec.ts<br><span style="color:#c8f13f">✓ 6 tests passed</span><br>optical lifecycle: clean</div></div></div>
+          <div class="activeComposer" data-composer-card><span class="placeholder">继续对话...</span><div class="toolbar"><span class="model">UNIT-08 / ACTIVE</span><button class="sendButton primary" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button></div></div>
+        </section>
+      </section>
+    </div>
+  </main>
+  <div class="settingsLayer" data-slot="sidebar.settings"><div role="presentation"><section class="settingsDialog" role="dialog" aria-modal="true"><h2>设置</h2><p>管理 DSH Web 的界面与皮肤。</p><div class="settingGrid"><nav class="settingNav"><button>常规</button><button aria-selected="true">皮肤</button><button>模型</button></nav><div><div class="skinCard"><img class="miniArt" data-preview-art alt=""><div><strong>真希波 · UNIT-08</strong><span>玫红光学台与荧光校准界面</span></div><span class="selectedBadge">已启用</span></div></div></div></section></div></div>
+  <script type="module">
+    import { activateSkin } from '../shared/runtime.js'
+    import { SKIN_ART } from '../shared/art.js'
+    const query = new URLSearchParams(location.search)
+    if (query.get('theme') === 'dark') document.body.dataset.dsDarkTheme = ''
+    document.body.classList.add(`scene-${query.get('scene') || 'hero'}`)
+    document.querySelector('[data-preview-art]').src = SKIN_ART
+    let cleanup
+    activateSkin({ effect(factory) { cleanup = factory() } })
+    addEventListener('beforeunload', () => cleanup?.())
+  </script>
+</body>
+</html>

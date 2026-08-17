@@ -4,7 +4,7 @@
 
 面向 DSH Web UI 的真希波·玛丽 / EVA 八号机主题皮肤。设计语言采用烟紫黑、玫红、荧光黄绿、暖象牙白与眼镜双镜片光学准星。
 
-![暗色模式预览](preview/dark.webp)
+![真希波 · UNIT-08 实际运行截图](preview/dark.webp)
 
 ## 特性
 

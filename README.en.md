@@ -2,7 +2,7 @@
 
 An unofficial Mari Makinami / EVA Unit-08 interface skin for the DSH Web UI, built around smoked plum, vivid magenta, acid-green calibration marks, warm ivory, and a dual-lens optical reticle.
 
-![Dark preview](preview/dark.webp)
+![Mari · UNIT-08 runtime screenshot](preview/dark.webp)
 
 ## Highlights
 

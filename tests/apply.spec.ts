@@ -143,4 +143,13 @@ describe('真希波 · UNIT-08 interface skin', () => {
     expect(SKIN_CSS).toContain('height: min(88vh, 920px);')
     expect(SKIN_CSS).toContain('max-width: calc(100vw - var(--mari-sidebar-width) - 24px);')
   })
+
+  it('keeps active-chat artwork recognizable on wide screens and progressively quieter on narrow screens', () => {
+    expect(SKIN_CSS).toContain(":has(:is([data-phase='active'][data-chat-flow], [data-phase='active'] [data-chat-flow])) [data-skin-artwork]")
+    expect(SKIN_CSS).toContain('opacity: 0.15;')
+    expect(SKIN_CSS).toContain('saturate(0.6)')
+    expect(SKIN_CSS).toContain('opacity: 0.1;')
+    expect(SKIN_CSS).toContain('opacity: 0.08;')
+    expect(SKIN_CSS).toContain('opacity: 0.05;')
+  })
 })

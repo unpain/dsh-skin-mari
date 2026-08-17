@@ -1,7 +1,7 @@
 {
   "name": "dsh-skin-mari",
   "description": "A Unit-08 optical test-lab interface in magenta, smoked plum, acid green, and warm ivory.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "main": "lib/index.js",

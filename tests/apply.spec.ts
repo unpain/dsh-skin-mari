@@ -137,6 +137,12 @@ describe('真希波 · UNIT-08 interface skin', () => {
     expect(SKIN_CSS).toContain('@media (prefers-reduced-motion: reduce)')
   })
 
+  it('keeps the sidebar aligned with host Appearance state without a duplicate toggle', () => {
+    expect(SKIN_CSS).toContain("body[data-dsh-mari-interface] :is([data-pane='sidebar'], [class*='sidebarCol'])")
+    expect(SKIN_CSS).toContain("body[data-dsh-mari-interface][data-ds-dark-theme] :is([data-pane='sidebar'], [class*='sidebarCol'])")
+    expect(SKIN_CSS).not.toContain('data-skin-theme-toggle')
+  })
+
   it('keeps the full-height hero artwork inside the viewport', () => {
     expect(SKIN_CSS).toContain('right: clamp(18px, 2vw, 36px);')
     expect(SKIN_CSS).toContain('bottom: clamp(12px, 1.6vh, 20px);')

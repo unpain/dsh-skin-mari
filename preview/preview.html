@@ -113,7 +113,7 @@
             <div data-composer-card><span class="placeholder">描述一个清晰的任务...</span><div class="toolbar"><div class="tools"><button class="toolButton"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><span class="model">GPT-5.6-LUNA / MAX</span></div><button class="sendButton primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button></div></div>
           </div>
         </section>
-        <section class="activeScene" data-phase="active" data-chat-flow>
+        <section class="activeScene" data-phase="active">
           <div class="messageRow userRow"><div class="bubble">帮我检查这个光学主题的切换和清理逻辑。</div></div>
           <div class="messageRow assistantRow"><div class="assistantContent"><strong>校准完成。</strong><p>激活过程由皮肤管理器统一接管，注册阶段保持惰性。切换回默认皮肤时，主题节点、系统颜色、标题和 favicon 都会恢复。</p><div class="reasoning">正在核对观察器、动画帧与侧栏尺寸监听的回收顺序……</div><div data-terminal>$ node tests/apply.spec.ts<br><span style="color:#c8f13f">✓ 6 tests passed</span><br>optical lifecycle: clean</div></div></div>
           <div class="activeComposer" data-composer-card><span class="placeholder">继续对话...</span><div class="toolbar"><span class="model">UNIT-08 / ACTIVE</span><button class="sendButton primary" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button></div></div>
@@ -127,7 +127,9 @@
     import { SKIN_ART } from '../shared/art.js'
     const query = new URLSearchParams(location.search)
     if (query.get('theme') === 'dark') document.body.dataset.dsDarkTheme = ''
-    document.body.classList.add(`scene-${query.get('scene') || 'hero'}`)
+    const scene = query.get('scene') || 'hero'
+    document.body.classList.add(`scene-${scene}`)
+    if (scene === 'active') document.querySelector('.activeScene').dataset.chatFlow = ''
     document.querySelector('[data-preview-art]').src = SKIN_ART
     let cleanup
     activateSkin({ effect(factory) { cleanup = factory() } })

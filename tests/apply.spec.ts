@@ -136,4 +136,11 @@ describe('真希波 · UNIT-08 interface skin', () => {
     expect(SKIN_CSS).toContain('@media (max-width: 620px)')
     expect(SKIN_CSS).toContain('@media (prefers-reduced-motion: reduce)')
   })
+
+  it('keeps the full-height hero artwork inside the viewport', () => {
+    expect(SKIN_CSS).toContain('right: clamp(18px, 2vw, 36px);')
+    expect(SKIN_CSS).toContain('bottom: clamp(12px, 1.6vh, 20px);')
+    expect(SKIN_CSS).toContain('height: min(88vh, 920px);')
+    expect(SKIN_CSS).toContain('max-width: calc(100vw - var(--mari-sidebar-width) - 24px);')
+  })
 })

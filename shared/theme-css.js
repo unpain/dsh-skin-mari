@@ -112,10 +112,12 @@ body[data-dsh-mari-interface] [data-skin-chrome='mari-artwork-stage'] {
 
 body[data-dsh-mari-interface] [data-skin-artwork] {
   position: absolute;
-  right: clamp(-44px, 1.5vw, 34px);
-  bottom: -2.5vh;
+  right: clamp(18px, 2vw, 36px);
+  bottom: clamp(12px, 1.6vh, 20px);
   width: auto;
-  height: min(93vh, 1050px);
+  height: min(88vh, 920px);
+  max-width: calc(100vw - var(--mari-sidebar-width) - 24px);
+  object-fit: contain;
   opacity: 0.95;
   filter: drop-shadow(-20px 22px 34px rgba(48, 8, 34, 0.31));
   transform-origin: right bottom;
@@ -520,8 +522,9 @@ body[data-dsh-mari-interface] ::-webkit-scrollbar-thumb {
 
 @media (max-width: 1180px) {
   body[data-dsh-mari-interface] [data-skin-artwork] {
-    right: -150px;
-    height: 84vh;
+    right: clamp(12px, 2vw, 24px);
+    bottom: 12px;
+    height: 82vh;
     opacity: 0.58;
   }
   body[data-dsh-mari-interface] [data-skin-orbit] { right: 36px; width: 580px; }
@@ -539,8 +542,8 @@ body[data-dsh-mari-interface] ::-webkit-scrollbar-thumb {
 
 @media (max-width: 620px) {
   body[data-dsh-mari-interface] [data-skin-artwork] {
-    right: -220px;
-    height: 72vh;
+    right: 8px;
+    height: 68vh;
     opacity: 0.055;
   }
   body[data-dsh-mari-interface] [data-skin-chrome='mari-accent-rail'] { left: 0; }

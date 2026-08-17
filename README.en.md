@@ -6,7 +6,7 @@ An unofficial Mari Makinami / EVA Unit-08 interface skin for the DSH Web UI, bui
 
 ## Highlights
 
-- Full-height Mari artwork, Unit-08 optical reticles, and calibration telemetry on the welcome screen.
+- Full-height Mari artwork and Unit-08 optical reticles on the welcome screen.
 - Artwork automatically fades, desaturates, and shifts aside during active conversations.
 - Deliberate light and dark treatments for settings, menus, terminal surfaces, messages, and disabled states.
 - Responsive and reduced-motion behavior.

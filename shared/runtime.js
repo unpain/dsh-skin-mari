@@ -23,17 +23,14 @@ function createArtworkStage() {
   const stage = createOwned('div', 'mari-artwork-stage')
   const orbit = document.createElement('span')
   const optics = document.createElement('span')
-  const telemetry = document.createElement('span')
   const artwork = document.createElement('img')
   stage.setAttribute('aria-hidden', 'true')
   orbit.dataset.skinOrbit = ''
   optics.dataset.mariOptics = ''
-  telemetry.dataset.mariTelemetry = ''
-  telemetry.textContent = 'OPTICAL TEST // UNIT-08 // MAGI LINK GREEN'
   artwork.dataset.skinArtwork = ''
   artwork.alt = ''
   artwork.src = SKIN_ART
-  stage.append(orbit, optics, telemetry, artwork)
+  stage.append(orbit, optics, artwork)
   return stage
 }
 

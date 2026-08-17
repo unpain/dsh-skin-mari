@@ -55,7 +55,7 @@ describe('真希波 · UNIT-08 interface skin', () => {
     expect(document.body.hasAttribute('data-dsh-mari-interface')).toBe(true)
     expect(document.querySelector('[data-skin-artwork]')).not.toBeNull()
     expect(document.querySelector('[data-mari-optics]')).not.toBeNull()
-    expect(document.querySelector('[data-mari-telemetry]')?.textContent).toContain('UNIT-08')
+    expect(document.querySelector('[data-mari-telemetry]')).toBeNull()
     expect(document.querySelector("[data-skin-chrome='mari-accent-rail']")).not.toBeNull()
     expect(document.head.querySelector("[data-skin-chrome='mari-styles']")).not.toBeNull()
 

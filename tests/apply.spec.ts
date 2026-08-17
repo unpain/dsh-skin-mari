@@ -109,10 +109,10 @@ describe('真希波 · UNIT-08 interface skin', () => {
   })
 
   it('registers without changing the page before selection', () => {
-    let registered: { id: string; name: string } | undefined
+    let registered: { id: string; name: string; author: string } | undefined
     const ctx = {
       skinManager: {
-        register(definition: { id: string; name: string }) {
+        register(definition: { id: string; name: string; author: string }) {
           registered = definition
           return () => undefined
         },
@@ -123,7 +123,7 @@ describe('真希波 · UNIT-08 interface skin', () => {
     }
 
     apply(ctx as never)
-    expect(registered).toMatchObject({ id: 'dsh-skin-mari', name: '真希波 · UNIT-08' })
+    expect(registered).toMatchObject({ id: 'dsh-skin-mari', name: '真希波 · UNIT-08', author: 'yujimaka' })
     expect(document.body.hasAttribute('data-dsh-mari-interface')).toBe(false)
   })
 
